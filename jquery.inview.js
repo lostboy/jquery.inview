@@ -105,7 +105,8 @@
       var $element      = $($elements[i]),
           elementSize   = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
           elementOffset = $element.offset(),
-          inView        = $element.data('inview');
+          inView        = $element.data('inview'),
+          distance      = $element.data('inview-vertical-offset');
 
       // Don't ask me why because I haven't figured out yet:
       // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
@@ -116,8 +117,8 @@
         return;
       }
 
-      if (elementOffset.top + elementSize.height > viewportOffset.top &&
-          elementOffset.top < viewportOffset.top + viewportSize.height &&
+      if (elementOffset.top + elementSize.height + distance > viewportOffset.top &&
+          elementOffset.top < viewportOffset.top + viewportSize.height + distance &&
           elementOffset.left + elementSize.width > viewportOffset.left &&
           elementOffset.left < viewportOffset.left + viewportSize.width) {
         if (!inView) {
